@@ -2,7 +2,7 @@ let jwt = require("jsonwebtoken");
 let JWT_SECRET = process.env.JWT_SECRET;
 
 let checkJWT = function (req, res, next) {
-    
+
   let header = req.get("Authorization");
   if (header) {
     let parts = header.split(" ");
@@ -16,7 +16,7 @@ let checkJWT = function (req, res, next) {
 
   try {
     let token = jwt.verify(signedToken, JWT_SECRET);
-    console.log("this is the token:", token);
+    console.log("Here is the token:", token);
     req["_token"] = token;
     next();
   } catch (err) {
