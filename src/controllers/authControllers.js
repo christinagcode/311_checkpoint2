@@ -6,22 +6,14 @@ let JWT_SECRET = process.env.JWT_SECRET
 let register = async function(req,res){
  console.log("inside register function")
 
-
- /**
-  * 1. get the email and password from the request
-  * 2. hash up the password
-  * 3. store the email and password hash
-  * 4. if store was successfull return 202, if store failed return 500
-  */
-
  let email = req.body.email;
  let password = req.body.password;
  let fullname = req.body.fullname;
 
  let pwHash = await argon.hash(password);
 
- let sql = "insert into users(email, name, password_hash) values(?, ?, ?)";
-let params = [email, fullname, pwHash];
+ let sql = "insert into userNamePets(email, userName, password_hash) values(?, ?, ?)";
+let params = [email, userName, pwHash];
 
 db.query(sql, params, function(err, rows){
     if(err){
@@ -35,22 +27,11 @@ db.query(sql, params, function(err, rows){
 
 let login = function(req,res){
     console.log("inside login function")
- 
-/**
- * 1. get the email and password from the requrest 
- * 2. get the password hash from the db for the email
- *      2.a. if no email exists return 403
- *      2.a if more than  1 email exists return 500
- *      2.b if exactly 1 email exists, got to #3
- * 3. compare the password to the password hash
- * 4. if they match, return a token
- * 5. if they do not match return a 403
- * 
- */
+
 let email = req.body.email;
 let password = req.body.password;
 
-let sql = "SELECT * from users where email = ?";
+let sql = "SELECT * from userNamePets where email = ?";
 let params = [email];
 
 db.query(sql, params, async function(err, rows){
@@ -68,7 +49,7 @@ db.query(sql, params, async function(err, rows){
         return;
     }
 
-    let pwHash = rows[0].password_hash;
+    let pwHash = rows[0].password_Hash;
 
     let match = await argon.verify(pwHash, password);
 
