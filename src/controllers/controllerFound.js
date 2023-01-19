@@ -8,6 +8,7 @@ let addItem = function(req,res){
     let sql = "INSERT INTO foundPets (name, lostDate, description) values (?, ?, ?)";
     let params = [n, d, desc];
 
+    // add userId to the foundPet entry
     db.query(sql, params, function(err, results){
         if(err){
             res.sendStatus(500);
@@ -22,6 +23,7 @@ let editItem = function(req,res){
     let name = req.body.name;
     let lostDate = req.body.lostDate;
     let description = req.body.description;
+    // need a where clause to the sql statement
 
     let sql = "UPDATE foundPets set id = ?, name = ?, lostDate = ?, description = ?"
     let params = [id, name, lostDate, description];
@@ -66,7 +68,7 @@ let getItem = function(req,res){
 
 let deleteItem = function(req,res){
     let id = req.params.id;
-
+    // add userId to the where clause so that ony owner can delete entry 
     let sql = "DELETE from foundPets where id = ?"
     let params = [id];
 
