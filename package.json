@@ -1,14 +1,15 @@
 {
-    "name":"311_checkpoint2",
-    "scripts":{
-        "start":"nodemon src/main.js"
+    "name": "311_checkpoint2",
+    "scripts": {
+        "start": "nodemon src/main.js"
     },
     "dependencies": {
-        "mysql":"2.18.1",
-        "express":"4.18.2",
-        "nodemon":"2.0.20",
-        "jsonwebtoken":"9.0.0",
-        "argon2":"0.30.3",
-        "dotenv":"16.0.3"
+        "argon2": "0.30.3",
+        "dotenv": "16.0.3",
+        "express": "4.18.2",
+        "i": "^0.3.7",
+        "jsonwebtoken": "9.0.0",
+        "mysql": "2.18.1",
+        "nodemon": "2.0.20"
     }
 }

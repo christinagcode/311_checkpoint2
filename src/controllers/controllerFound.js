@@ -1,14 +1,12 @@
 let db = require("../db.js");
 
-
 let addItem = function(req,res){
     let n = req.body.name;
-    let d = req.body.lostDate;
+    let d = req.body.foundDate;
     let desc = req.body.description;
-    let sql = "INSERT INTO foundPets (name, lostDate, description) values (?, ?, ?)";
+    let sql = "INSERT INTO foundPets (name, foundDate, description) values (?, ?, ?)";
     let params = [n, d, desc];
 
-    // add userId to the foundPet entry
     db.query(sql, params, function(err, results){
         if(err){
             res.sendStatus(500);
@@ -21,9 +19,8 @@ let addItem = function(req,res){
 let editItem = function(req,res){ 
     let id = req.param.id;
     let name = req.body.name;
-    let lostDate = req.body.lostDate;
+    let foundDate = req.body.foundDate;
     let description = req.body.description;
-    // need a where clause to the sql statement
 
     let sql = "UPDATE foundPets set id = ?, name = ?, lostDate = ?, description = ?"
     let params = [id, name, lostDate, description];
@@ -39,7 +36,7 @@ let editItem = function(req,res){
 }
 
 let listItem = function(req,res){
-    db.query("SELECT id, name, lostDate, description FROM foundPets", function(err,results){
+    db.query("SELECT id, name, foundDate, description FROM foundPets", function(err,results){
         if(err){
             console.log("Failed to fetch foundPets from database", err);
             res.sendStatus(500);
@@ -53,7 +50,7 @@ let getItem = function(req,res){
 
     let id = req.params.id;
 
-    let sql = "SELECT id, name, lostDate, description FROM foundPets where id = ?"
+    let sql = "SELECT id, name, foundDate, description FROM foundPets where id = ?"
     let params = [id];
     db.query(sql, params, function(err, results){
         if(err){
@@ -68,7 +65,7 @@ let getItem = function(req,res){
 
 let deleteItem = function(req,res){
     let id = req.params.id;
-    // add userId to the where clause so that ony owner can delete entry 
+
     let sql = "DELETE from foundPets where id = ?"
     let params = [id];
 

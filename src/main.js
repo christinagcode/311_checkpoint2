@@ -15,6 +15,10 @@ app.use(routeLost);
 let routeFound = require("./routes/routeFound")
 app.use(routeFound);
 
+app.get("/", (req, res) => {
+    res.send("Hello! findMe API.");
+  });
+
 app.listen(PORT, function(){
     console.log("Application is running on port", PORT);
 });
