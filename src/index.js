@@ -15,7 +15,7 @@ app.use(routeLost);
 let routeFound = require("./routes/routeFound")
 app.use(routeFound);
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
     res.send("Hello! findMe API.");
   });
 
